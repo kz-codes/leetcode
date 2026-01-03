@@ -15,27 +15,21 @@ DB_CONFIG: dict[str, Any] = {
 print(DB_CONFIG)
 
 
-def executeList(queries: list[str]):
+def executeInput():
     """Executes a list of queries and returns the results of the LAST query (if any)."""
     rows = []
     con = pg.connect(**DB_CONFIG)
     cur = con.cursor()
 
     try:
-        for q in queries:
-            try:
-                cur.execute(q)
-                con.commit()
+        cur.execute(open("input.sql").read())
+        con.commit()
 
-                if cur.description:
-                    rows = cur.fetchall()
-
-            except pg.Error as e:
-                print(f"Error running query: {q}\n{e}")
-                con.rollback()
-
-    except Exception as e:
-        print(f"Connection error: {e}")
+        if cur.description:
+            rows = cur.fetchall()
+    except pg.Error as e:
+        print(f"Error: {e}")
+        con.rollback()
     finally:
         cur.close()
         con.close()
@@ -64,3 +58,8 @@ def execute(query: str):
         con.close()
 
     return rows
+
+
+def dropTable(tableName: str):
+    """Drops a table."""
+    execute(f"drop table {tableName}")
