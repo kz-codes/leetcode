@@ -1,44 +1,45 @@
 Create table
-    If Not Exists Views (
-        article_id int,
-        author_id int,
-        viewer_id int,
-        view_date date
+    If Not Exists Sales (
+        sale_id int,
+        product_id int,
+        year int,
+        quantity int,
+        price int
     );
 
-Truncate table Views;
+Create table
+    If Not Exists Product (product_id int, product_name varchar(10));
+
+Truncate table Sales;
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Sales (sale_id, product_id, year, quantity, price)
 values
-    ('1', '3', '5', '2019-08-01');
+    ('1', '100', '2008', '10', '5000');
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Sales (sale_id, product_id, year, quantity, price)
 values
-    ('1', '3', '6', '2019-08-02');
+    ('2', '100', '2009', '12', '5000');
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Sales (sale_id, product_id, year, quantity, price)
 values
-    ('2', '7', '7', '2019-08-01');
+    ('7', '200', '2011', '15', '9000');
+
+Truncate table Product;
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Product (product_id, product_name)
 values
-    ('2', '7', '6', '2019-08-02');
+    ('100', 'Nokia');
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Product (product_id, product_name)
 values
-    ('4', '7', '1', '2019-07-22');
+    ('200', 'Apple');
 
 insert into
-    Views (article_id, author_id, viewer_id, view_date)
+    Product (product_id, product_name)
 values
-    ('3', '4', '4', '2019-07-21');
-
-insert into
-    Views (article_id, author_id, viewer_id, view_date)
-values
-    ('3', '4', '4', '2019-07-21');
+    ('300', 'Samsung');
